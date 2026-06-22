@@ -57,8 +57,8 @@ export function OnboardingPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#f4f2f0] sm:p-6">
-      <section className="relative flex h-[844px] w-full max-w-[390px] flex-col items-center overflow-hidden rounded-[40px] bg-[#fff8f1] px-7 text-center shadow-[0_24px_72px_rgba(42,26,31,0.13),0_2px_12px_rgba(0,0,0,0.05)]">
+    <main className="flex min-h-[100dvh] items-center justify-center bg-[#fff8f1] md:bg-[#f4f2f0] md:p-6">
+      <section className="relative flex h-[100dvh] min-h-[100dvh] w-full flex-col items-center overflow-hidden bg-[#fff8f1] px-7 text-center md:h-[844px] md:min-h-0 md:max-w-[390px] md:rounded-[40px] md:shadow-[0_24px_72px_rgba(42,26,31,0.13),0_2px_12px_rgba(0,0,0,0.05)]">
         <button className="absolute right-[28px] top-[55.75px] text-[13px] font-medium leading-[19.5px] tracking-[-0.2px] text-[#c4a8ab]" onClick={finish} type="button">
           건너뛰기
         </button>
@@ -72,7 +72,7 @@ export function OnboardingPage() {
           <h1 className="text-[22px] font-bold leading-[31.9px] tracking-[-0.5px] text-[#2a1a1f]">{slide.title}</h1>
           <p className="mx-auto mt-3 w-[318px] text-[14px] font-normal leading-[23.8px] tracking-[-0.2px] text-[#9b7478]">{slide.description}</p>
         </div>
-        <div className="absolute bottom-[52px] left-7 right-7">
+        <div className="absolute bottom-[calc(52px+env(safe-area-inset-bottom))] left-7 right-7 md:bottom-[52px]">
           <div className="mb-5 flex h-[7px] justify-center gap-2">
             {slides.map((item, slideIndex) => (
               <span className={slideIndex === index ? "h-[7px] w-[22px] rounded-[4px] bg-[#d4144f]" : "size-[7px] rounded-full bg-[#ffb6a3] opacity-35"} key={item.title} />

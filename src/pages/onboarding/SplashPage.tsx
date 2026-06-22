@@ -16,8 +16,8 @@ export function SplashPage() {
   }, [navigate]);
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#f4f2f0] sm:p-6">
-      <section className="relative h-[844px] w-full max-w-[390px] overflow-hidden rounded-[40px] bg-[#fff8f1] text-center shadow-[0_24px_72px_rgba(42,26,31,0.13),0_2px_12px_rgba(0,0,0,0.05)]">
+    <main className="flex min-h-[100dvh] items-center justify-center bg-[#fff8f1] md:bg-[#f4f2f0] md:p-6">
+      <section className="relative h-[100dvh] min-h-[100dvh] w-full overflow-hidden bg-[#fff8f1] text-center md:h-[844px] md:min-h-0 md:max-w-[390px] md:rounded-[40px] md:shadow-[0_24px_72px_rgba(42,26,31,0.13),0_2px_12px_rgba(0,0,0,0.05)]">
         <div className="absolute left-1/2 top-[300px] h-[123px] w-[237px] -translate-x-1/2">
           <img alt="다시와" className="mx-auto h-[123px] w-[164px] object-contain" src={FIGMA_LOGO_URL} />
         </div>
@@ -27,7 +27,7 @@ export function SplashPage() {
         <p className="absolute left-1/2 top-[535px] w-[260px] -translate-x-1/2 text-center text-[11.5px] font-normal leading-[17.25px] tracking-[-0.1px] text-[#c4a8ab]">
           고객 기록과 재방문 타이밍을 가볍게 관리해요.
         </p>
-        <div className="absolute bottom-[36px] left-1/2 flex -translate-x-1/2 items-center gap-[6px]">
+        <div className="absolute bottom-[calc(36px+env(safe-area-inset-bottom))] left-1/2 flex -translate-x-1/2 items-center gap-[6px] md:bottom-[36px]">
           <span className="h-px w-[22px] bg-[#ffb6a3]" />
           <span className="text-[10px] font-medium leading-[15px] tracking-[0.2px] text-[#c4a8ab]">dasiwa</span>
           <span className="h-px w-[22px] bg-[#ffb6a3]" />

@@ -48,8 +48,8 @@ export function SignupPage() {
   }
 
   return (
-    <main className="flex min-h-screen items-center justify-center bg-[#f4f2f0] sm:p-6">
-      <section className="h-[844px] w-full max-w-[390px] overflow-hidden rounded-[40px] bg-dasiwa-bg px-[28px] pt-[52px] pb-[40px] shadow-[0_24px_64px_rgba(42,26,31,0.12),0_4px_16px_rgba(0,0,0,0.06)]">
+    <main className="flex min-h-[100dvh] items-center justify-center bg-dasiwa-bg md:bg-[#f4f2f0] md:p-6">
+      <section className="min-h-[100dvh] w-full overflow-y-auto bg-dasiwa-bg px-[28px] pb-[calc(40px+env(safe-area-inset-bottom))] pt-[52px] md:h-[844px] md:min-h-0 md:max-w-[390px] md:overflow-hidden md:rounded-[40px] md:pb-[40px] md:shadow-[0_24px_64px_rgba(42,26,31,0.12),0_4px_16px_rgba(0,0,0,0.06)]">
         <div className="flex flex-col items-center text-center">
           <img alt="다시와" className="h-[52px] w-[69.328px] object-contain" src={FIGMA_LOGO_URL} />
           <p className="mt-0 h-[51px] pb-[32px] text-[12.5px] leading-[18.75px] tracking-[-0.1px] text-[#9b7478]">고객 기록과 재방문 타이밍을 가볍게 관리해요.</p>
