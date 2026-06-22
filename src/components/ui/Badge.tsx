@@ -1,27 +1,16 @@
-import type { PropsWithChildren } from "react";
+﻿import type { PropsWithChildren } from "react";
 
 type BadgeTone = "rose" | "stone" | "green" | "amber";
 
 const toneClasses: Record<BadgeTone, string> = {
-  rose: "bg-rose-50 text-rose-700 ring-rose-200",
-  stone: "bg-stone-100 text-stone-700 ring-stone-200",
-  green: "bg-emerald-50 text-emerald-700 ring-emerald-200",
-  amber: "bg-amber-50 text-amber-800 ring-amber-200",
+  rose: "bg-dasiwa-primary-soft text-dasiwa-primary ring-dasiwa-accent/45",
+  stone: "bg-white text-dasiwa-muted ring-dasiwa-border",
+  green: "bg-[#E5F7EF] text-dasiwa-success ring-dasiwa-success/20",
+  amber: "bg-[#FFF4D8] text-dasiwa-warning ring-dasiwa-warning/25",
 };
 
-type BadgeProps = PropsWithChildren<{
-  tone?: BadgeTone;
-}>;
+type BadgeProps = PropsWithChildren<{ tone?: BadgeTone }>;
 
 export function Badge({ children, tone = "stone" }: BadgeProps) {
-  return (
-    <span
-      className={[
-        "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-medium ring-1 ring-inset",
-        toneClasses[tone],
-      ].join(" ")}
-    >
-      {children}
-    </span>
-  );
+  return <span className={["inline-flex items-center rounded-full px-2.5 py-1 text-[11px] font-bold ring-1 ring-inset", toneClasses[tone]].join(" ")}>{children}</span>;
 }

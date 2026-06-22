@@ -1,18 +1,14 @@
 import { Outlet } from "react-router-dom";
-import { Header } from "./Header";
 import { Sidebar } from "./Sidebar";
 
 export function AppLayout() {
   return (
-    <div className="min-h-screen bg-stone-50 text-stone-950">
-      <div className="flex min-h-screen">
+    <div className="min-h-screen bg-[#f4f2f0] text-dasiwa-text sm:flex sm:items-center sm:justify-center sm:p-6">
+      <div className="relative mx-auto min-h-[844px] w-full max-w-[390px] overflow-hidden rounded-[40px] bg-dasiwa-bg shadow-[0_24px_72px_rgba(42,26,31,0.13),0_2px_12px_rgba(0,0,0,0.05)]">
+        <main className="h-[844px] overflow-y-auto pb-[82.75px]">
+          <Outlet />
+        </main>
         <Sidebar />
-        <div className="flex min-w-0 flex-1 flex-col">
-          <Header />
-          <main className="mx-auto w-full max-w-6xl flex-1 px-4 py-5 sm:px-6 lg:px-8">
-            <Outlet />
-          </main>
-        </div>
       </div>
     </div>
   );

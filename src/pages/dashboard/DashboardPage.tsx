@@ -1,149 +1,168 @@
 import { Link } from "react-router-dom";
-import { Badge } from "../../components/ui/Badge";
-import { Button } from "../../components/ui/Button";
-import { PageHeader } from "../../components/ui/PageHeader";
-import { StatCard } from "../../components/ui/StatCard";
 import { useAuth } from "../../features/auth/auth.hooks";
 import { useDashboardData } from "../../features/dashboard/dashboard.hooks";
 import { useFollowUps } from "../../features/follow-ups/followUps.hooks";
 import { formatDate } from "../../lib/dates";
 
+const imgImage = "http://localhost:3845/assets/5335b8b6d0e169e7cf8bdd06dbd8eda6f830d691.png";
+const imgBell = "http://localhost:3845/assets/e7fb1f9a81c3b1184a0d22a61a107c8528346997.svg";
+const imgSettings = "http://localhost:3845/assets/fd4aa48f1950bec8611d9fa6e4c671bb5c7cc9ad.svg";
+const imgChevronCustomer = "http://localhost:3845/assets/a1472512e55291d9bfa2567fece5fa507e5a6060.svg";
+const imgChevronTreatment = "http://localhost:3845/assets/9759797cc3a986b6365e6e8eab3b6d8b05171f83.svg";
+const imgChevronHeader = "http://localhost:3845/assets/a7f0636986fadb6ab8fbc7eb8bbbc372463f225a.svg";
+
+function dday(date: string | null) {
+  if (!date) return "D-";
+  const today = new Date();
+  const due = new Date(`${date}T00:00:00`);
+  today.setHours(0, 0, 0, 0);
+  return `D-${Math.max(0, Math.ceil((due.getTime() - today.getTime()) / 86400000))}`;
+}
+
+function FollowPreview({ customer }: { customer: { id: string; name: string; next_visit_due_date: string | null } }) {
+  return (
+    <Link className="bg-[rgba(255,255,255,0.14)] flex items-center gap-[8px] pl-[5px] pr-[10px] py-[5px] rounded-[20px]" to={`/app/customers/${customer.id}`}>
+      <span className="bg-[rgba(255,255,255,0.3)] flex size-[22px] shrink-0 items-center justify-center rounded-[11px] text-[10px] font-bold leading-[15px] text-white">{customer.name.slice(0, 1)}</span>
+      <span className="w-[32.828px] truncate text-[12px] font-normal leading-[18px] tracking-[-0.1px] text-[rgba(255,255,255,0.9)]">{customer.name}</span>
+      <span className="text-[10.5px] font-medium leading-[15.75px] text-[rgba(255,255,255,0.65)]">{dday(customer.next_visit_due_date)}</span>
+    </Link>
+  );
+}
+
+function CustomerRow({ customer, index, total }: { customer: { id: string; name: string; preferred_service: string | null; next_visit_due_date: string | null }; index: number; total: number }) {
+  const isSecond = index === 1;
+  return (
+    <>
+      <Link className="flex w-full items-center gap-[12px] px-[16px] py-[14px]" to={`/app/customers/${customer.id}`}>
+        <span className={["flex size-[36px] shrink-0 items-center justify-center rounded-[18px] text-[12.96px] font-bold leading-[19.44px]", isSecond ? "bg-[#fdf0f3] text-dasiwa-primary" : "bg-[#fff3ee] text-dasiwa-accent"].join(" ")}>{customer.name.slice(0, 1)}</span>
+        <span className="min-w-0 flex-[218_0_0]">
+          <span className="flex h-[24px] items-center gap-[6px] pb-[3px]">
+            <span className="truncate text-[14px] font-bold leading-[21px] tracking-[-0.2px] text-dasiwa-text">{customer.name}</span>
+            {customer.preferred_service ? <span className="h-[18.5px] rounded-[4px] bg-[#fff3ee] px-[6px] text-[11px] font-normal leading-[16.5px] text-[#c4a8ab]">{customer.preferred_service}</span> : null}
+          </span>
+          <span className="block h-[24px] text-[12px] font-normal leading-[24px] tracking-[-0.1px] text-[#9b7478]">다음 방문 {formatDate(customer.next_visit_due_date)}</span>
+        </span>
+        <img alt="" className="size-[15px] shrink-0" src={imgChevronCustomer} />
+      </Link>
+      {index < total - 1 ? <div className="mx-[16px] h-px bg-[#f0e4dc]" /> : null}
+    </>
+  );
+}
+
+function TreatmentRow({ treatment, index, total }: { treatment: { id: string; customer_id: string; customerName?: string | null; service_name?: string | null; treatment_date: string; next_visit_due_date: string | null }; index: number; total: number }) {
+  return (
+    <>
+      <Link className="flex w-full items-center justify-between px-[16px] py-[13px]" to={`/app/customers/${treatment.customer_id}`}>
+        <span className="min-w-0">
+          <span className="flex items-center gap-[6px]">
+            <span className="truncate text-[13.5px] font-bold leading-[20.25px] tracking-[-0.2px] text-dasiwa-text">{treatment.customerName || "고객"}</span>
+            <span className="truncate text-[12.5px] font-normal leading-[18.75px] tracking-[-0.1px] text-[#9b7478]">{treatment.service_name || "시술 기록"}</span>
+          </span>
+          <span className="mt-[3px] flex items-center gap-[8px]">
+            <span className="text-[11.5px] font-normal leading-[17.25px] text-[#c4a8ab]">시술 {formatDate(treatment.treatment_date)}</span>
+            <span className="size-[3px] rounded-[1.5px] bg-[#ead8d0]" />
+            <span className="text-[11.5px] font-medium leading-[17.25px] text-dasiwa-primary">재방문 {formatDate(treatment.next_visit_due_date)}</span>
+          </span>
+        </span>
+        <img alt="" className="size-[14px] shrink-0" src={imgChevronTreatment} />
+      </Link>
+      {index < total - 1 ? <div className="mx-[16px] h-px bg-[#f0e4dc]" /> : null}
+    </>
+  );
+}
+
 export function DashboardPage() {
   const { user } = useAuth();
-  const {
-    data,
-    errorMessage: dashboardErrorMessage,
-    isLoading: isDashboardLoading,
-  } = useDashboardData(user?.id);
-  const {
-    customers: followUpCustomers,
-    errorMessage: followUpErrorMessage,
-    isLoading: areFollowUpsLoading,
-  } = useFollowUps(user?.id);
+  const { data, errorMessage: dashboardError, isLoading: dashboardLoading } = useDashboardData(user?.id);
+  const { customers: followUps, errorMessage: followUpError, isLoading: followUpsLoading } = useFollowUps(user?.id);
+  const errorMessage = dashboardError || followUpError;
+  const previewFollowUps = followUps.slice(0, 3);
+  const recentCustomers = data.customers.slice(0, 2);
+  const recentTreatments = data.recentTreatments.slice(0, 3);
 
   return (
-    <div className="pb-20 lg:pb-0">
-      <PageHeader
-        eyebrow="다시와 홈"
-        title="오늘 기억해야 할 고객을 먼저 확인하세요"
-        description="고객 수, 연락할 고객, 최근 기록을 가볍게 모아 보여드려요."
-        action={
-          <Button asChild>
-            <Link to="/app/customers/new">고객 등록</Link>
-          </Button>
-        }
-      />
-
-      <section className="grid gap-3 sm:grid-cols-3">
-        <StatCard
-          label="전체 고객"
-          value={isDashboardLoading ? "-" : `${data.totalCustomerCount}명`}
-          helper="삭제되지 않은 고객 기준"
-        />
-        <StatCard
-          label="이번 주 연락"
-          value={areFollowUpsLoading ? "-" : `${followUpCustomers.length}명`}
-          helper="다음 방문 예정일 기준"
-        />
-        <StatCard
-          label="최근 시술 기록"
-          value={isDashboardLoading ? "-" : `${data.recentTreatments.length}건`}
-          helper="최근 등록된 기록"
-        />
-      </section>
-
-      {dashboardErrorMessage || followUpErrorMessage ? (
-        <div className="mt-4 rounded-lg bg-rose-50 p-4 text-sm text-rose-700">
-          {dashboardErrorMessage || followUpErrorMessage}
-        </div>
-      ) : null}
-
-      <section className="mt-6 grid gap-4 lg:grid-cols-[1.1fr_0.9fr]">
-        <div className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
-          <div className="mb-4 flex items-center justify-between gap-3">
-            <h3 className="text-base font-semibold text-stone-950">
-              이번 주 연락할 고객
-            </h3>
-            <Button asChild variant="secondary">
-              <Link to="/app/follow-ups">전체 보기</Link>
-            </Button>
+    <div className="flex min-h-[844px] flex-col items-start overflow-hidden bg-dasiwa-bg">
+      <div className="h-[48px] w-full shrink-0" />
+      <div className="min-h-0 w-full flex-[727_0_0] overflow-hidden">
+        <header className="flex w-full items-start justify-between px-[24px] pb-[16px]">
+          <div className="w-[149.594px] shrink-0">
+            <img alt="다시와" className="h-[34px] w-[45.328px] object-contain" src={imgImage} />
+            <div className="h-[23px] w-[149.594px] pt-[4px]">
+              <p className="whitespace-nowrap text-[12.5px] font-normal leading-[18.75px] tracking-[-0.15px] text-[#9b7478]">오늘 연락할 고객을 확인해요.</p>
+            </div>
           </div>
+          <div className="flex h-[38px] w-[76px] shrink-0 items-center gap-[8px] pt-[4px]">
+            <button className="relative flex size-[34px] items-center justify-center rounded-[17px] bg-[#fdf0f3]" type="button">
+              <img alt="" className="size-[16px]" src={imgBell} />
+              <span className="absolute left-[21px] top-[7px] size-[6px] rounded-[3px] border border-dasiwa-bg bg-dasiwa-primary" />
+            </button>
+            <Link className="flex size-[34px] items-center justify-center rounded-[17px]" to="/app/settings">
+              <img alt="" className="size-[17px]" src={imgSettings} />
+            </Link>
+          </div>
+        </header>
 
-          {areFollowUpsLoading ? (
-            <div className="rounded-lg bg-stone-50 p-5 text-center text-sm text-stone-500">
-              연락할 고객을 확인하는 중입니다.
-            </div>
-          ) : null}
+        {errorMessage ? <p className="mx-[24px] mb-[8px] rounded-[10px] bg-dasiwa-primary-soft px-3 py-2 text-[11px] text-dasiwa-primary">{errorMessage}</p> : null}
 
-          {!areFollowUpsLoading && followUpCustomers.length === 0 ? (
-            <div className="rounded-lg border border-dashed border-stone-300 p-6 text-center">
-              <p className="font-medium text-stone-800">
-                이번 주 연락할 고객이 없어요.
-              </p>
-              <p className="mt-2 text-sm text-stone-500">
-                시술 기록을 남기면 다음 방문 예정일 기준으로 자동 표시됩니다.
-              </p>
+        <section className="w-full px-[24px] pb-[20px]">
+          <div className="flex w-full items-center justify-between rounded-[18px] bg-dasiwa-primary px-[22px] py-[20px] text-white">
+            <div className="w-[116.609px] shrink-0">
+              <p className="whitespace-nowrap text-[12px] font-normal leading-[18px] tracking-[-0.1px] text-white/75">이번 주 연락할 고객</p>
+              <div className="relative mt-[6px] h-[39.5px] w-full">
+                <span className="absolute left-0 top-[-4px] text-[36px] font-bold leading-[36px] tracking-[-1px] text-white">{followUpsLoading ? "-" : followUps.length}</span>
+                <span className="absolute left-[23.89px] top-[15px] text-[15px] font-medium leading-[22.5px] text-white/85">명</span>
+              </div>
+              <div className="relative h-[48.75px] w-full">
+                <Link className="absolute left-0 top-[14px] flex h-[34.75px] w-[116.609px] items-center justify-center rounded-[8px] border border-white/30 bg-white/20 text-[12.5px] font-medium leading-[18.75px] tracking-[-0.1px] text-white" to="/app/follow-ups">연락할 고객 보기</Link>
+              </div>
             </div>
-          ) : null}
+            <div className="flex shrink-0 flex-col items-end gap-[7px]">
+              {previewFollowUps.length === 0 ? <p className="py-[5px] text-[12px] font-normal leading-[18px] tracking-[-0.1px] text-white/90">대상 없음</p> : null}
+              {previewFollowUps.map((customer) => <FollowPreview customer={customer} key={customer.id} />)}
+            </div>
+          </div>
+        </section>
 
-          {!areFollowUpsLoading && followUpCustomers.length > 0 ? (
-            <div className="space-y-3">
-              {followUpCustomers.slice(0, 3).map((customer) => (
-                <Link
-                  className="block rounded-lg border border-stone-200 p-4 transition hover:bg-stone-50"
-                  key={customer.id}
-                  to={`/app/customers/${customer.id}`}
-                >
-                  <div className="flex items-center justify-between gap-3">
-                    <p className="font-medium text-stone-950">{customer.name}</p>
-                    <Badge tone={customer.isContactedToday ? "green" : "rose"}>
-                      {customer.isContactedToday ? "연락 완료" : "연락 필요"}
-                    </Badge>
-                  </div>
-                  <p className="mt-1 text-sm text-stone-500">
-                    다음 방문 {formatDate(customer.next_visit_due_date)}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          ) : null}
-        </div>
+        <section className="w-full px-[24px] pb-[20px]">
+          <div className="flex h-[76.5px] w-[327px] overflow-hidden rounded-[14px] border border-[#ead8d0] bg-white p-px">
+            {[
+              [`${dashboardLoading ? "-" : data.totalCustomerCount}명`, "전체 고객", false],
+              [`${followUpsLoading ? "-" : followUps.length}명`, "이번 주 연락", true],
+              [`${dashboardLoading ? "-" : data.recentTreatmentCountLast7Days}건`, "최근 7일 시술", false],
+            ].map(([value, label, primary], index) => (
+              <div className={["flex h-full min-w-0 flex-1 flex-col items-center gap-[3px] py-[14px]", index < 2 ? "border-r border-[#f0e4dc] pr-px" : ""].join(" ")} key={label.toString()}>
+                <p className={(primary ? "text-dasiwa-primary" : "text-dasiwa-text") + " text-[18px] font-bold leading-[27px] tracking-[-0.5px]"}>{value}</p>
+                <p className="text-[11px] font-normal leading-[16.5px] tracking-[-0.1px] text-[#c4a8ab]">{label}</p>
+              </div>
+            ))}
+          </div>
+        </section>
 
-        <div className="rounded-lg border border-stone-200 bg-white p-5 shadow-sm">
-          <h3 className="text-base font-semibold text-stone-950">최근 등록 고객</h3>
-          {isDashboardLoading ? (
-            <div className="mt-4 rounded-lg bg-stone-50 p-5 text-center text-sm text-stone-500">
-              최근 고객을 불러오는 중입니다.
-            </div>
-          ) : null}
+        <section className="w-full px-[24px] pb-[20px]">
+          <div className="flex items-center justify-between">
+            <h2 className="text-[13.5px] font-bold leading-[20.25px] tracking-[-0.2px] text-dasiwa-text">최근 등록 고객</h2>
+            <Link className="flex items-center gap-px text-[12px] font-medium leading-[18px] tracking-[-0.1px] text-[#c4a8ab]" to="/app/customers">전체 보기<img alt="" className="size-[12px]" src={imgChevronHeader} /></Link>
+          </div>
+          <div className="mt-[12px] flex h-[155px] w-full flex-col overflow-hidden rounded-[14px] border border-[#ead8d0] bg-white p-px">
+            {dashboardLoading ? <p className="py-8 text-center text-[12px] text-dasiwa-muted">불러오는 중이에요.</p> : null}
+            {!dashboardLoading && recentCustomers.length === 0 ? <p className="py-8 text-center text-[12px] text-dasiwa-muted">아직 등록된 고객이 없어요.</p> : null}
+            {recentCustomers.map((customer, index) => <CustomerRow customer={customer} index={index} key={customer.id} total={recentCustomers.length} />)}
+          </div>
+        </section>
 
-          {!isDashboardLoading && data.customers.length === 0 ? (
-            <div className="mt-4 rounded-lg border border-dashed border-stone-300 p-5 text-center">
-              <p className="font-medium text-stone-800">아직 고객이 없습니다.</p>
-              <p className="mt-2 text-sm text-stone-500">
-                첫 고객을 등록하면 이곳에 표시됩니다.
-              </p>
-            </div>
-          ) : null}
-
-          {!isDashboardLoading && data.customers.length > 0 ? (
-            <div className="mt-4 space-y-3">
-              {data.customers.map((customer) => (
-                <Link
-                  className="block rounded-lg bg-stone-50 px-3 py-3 transition hover:bg-stone-100"
-                  key={customer.id}
-                  to={`/app/customers/${customer.id}`}
-                >
-                  <p className="font-medium text-stone-900">{customer.name}</p>
-                  <p className="mt-1 text-sm text-stone-500">
-                    {customer.preferred_service || "선호 시술 없음"}
-                  </p>
-                </Link>
-              ))}
-            </div>
-          ) : null}
-        </div>
-      </section>
+        <section className="w-full px-[24px] pb-[20px]">
+          <div className="flex items-center justify-between">
+            <h2 className="text-[13.5px] font-bold leading-[20.25px] tracking-[-0.2px] text-dasiwa-text">최근 시술 기록</h2>
+            <Link className="flex items-center gap-px text-[12px] font-medium leading-[18px] tracking-[-0.1px] text-[#c4a8ab]" to="/app/customers">전체 보기<img alt="" className="size-[12px]" src={imgChevronHeader} /></Link>
+          </div>
+          <div className="mt-[12px] flex h-[203.5px] w-full flex-col overflow-hidden rounded-[14px] border border-[#ead8d0] bg-white p-px">
+            {dashboardLoading ? <p className="py-8 text-center text-[12px] text-dasiwa-muted">불러오는 중이에요.</p> : null}
+            {!dashboardLoading && recentTreatments.length === 0 ? <p className="py-8 text-center text-[12px] text-dasiwa-muted">아직 시술 기록이 없어요.</p> : null}
+            {recentTreatments.map((treatment, index) => <TreatmentRow index={index} key={treatment.id} total={recentTreatments.length} treatment={treatment} />)}
+          </div>
+        </section>
+        <div className="h-[8px] w-full" />
+      </div>
     </div>
   );
 }

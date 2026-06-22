@@ -7,13 +7,11 @@ type InputProps = InputHTMLAttributes<HTMLInputElement> & {
 export function Input({ className = "", label, id, ...props }: InputProps) {
   return (
     <label className="block">
-      {label ? (
-        <span className="mb-1.5 block text-sm font-medium text-stone-700">{label}</span>
-      ) : null}
+      {label ? <span className="mb-[6px] block text-[12.5px] font-medium leading-[18.75px] tracking-[-0.1px] text-[#9b7478]">{label}</span> : null}
       <input
         id={id}
         className={[
-          "h-11 w-full rounded-lg border border-stone-300 bg-white px-3 text-sm text-stone-950 shadow-sm outline-none transition placeholder:text-stone-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-100",
+          "h-[48px] w-full rounded-[10px] border border-[#ead8d0] bg-[#fffaf7] px-[15px] text-[14px] font-normal tracking-[-0.1px] text-dasiwa-text outline-none placeholder:text-[rgba(42,26,31,0.5)] focus:border-dasiwa-primary focus:ring-0",
           className,
         ].join(" ")}
         {...props}

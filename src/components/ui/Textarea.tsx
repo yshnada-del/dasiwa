@@ -1,19 +1,15 @@
 import type { TextareaHTMLAttributes } from "react";
 
-type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & {
-  label?: string;
-};
+type TextareaProps = TextareaHTMLAttributes<HTMLTextAreaElement> & { label?: string };
 
 export function Textarea({ className = "", label, id, ...props }: TextareaProps) {
   return (
     <label className="block">
-      {label ? (
-        <span className="mb-1.5 block text-sm font-medium text-stone-700">{label}</span>
-      ) : null}
+      {label ? <span className="mb-[6px] block text-[12.5px] font-medium leading-[18.75px] tracking-[-0.1px] text-[#9b7478]">{label}</span> : null}
       <textarea
         id={id}
         className={[
-          "min-h-28 w-full resize-y rounded-lg border border-stone-300 bg-white px-3 py-2.5 text-sm text-stone-950 shadow-sm outline-none transition placeholder:text-stone-400 focus:border-rose-500 focus:ring-2 focus:ring-rose-100",
+          "min-h-28 w-full resize-y rounded-[10px] border border-[#ead8d0] bg-[#fffaf7] px-[15px] py-3 text-[14px] font-normal tracking-[-0.1px] text-dasiwa-text outline-none placeholder:text-[rgba(42,26,31,0.5)] focus:border-dasiwa-primary focus:ring-0",
           className,
         ].join(" ")}
         {...props}

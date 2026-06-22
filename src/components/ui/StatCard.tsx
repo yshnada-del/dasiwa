@@ -1,15 +1,9 @@
-type StatCardProps = {
-  label: string;
-  value: string;
-  helper: string;
-};
-
-export function StatCard({ helper, label, value }: StatCardProps) {
+﻿export function StatCard({ helper, label, value }: { helper?: string; label: string; value: string }) {
   return (
-    <div className="rounded-lg border border-stone-200 bg-white p-4 shadow-sm">
-      <p className="text-sm text-stone-500">{label}</p>
-      <p className="mt-2 text-3xl font-bold text-stone-950">{value}</p>
-      <p className="mt-2 text-sm text-stone-600">{helper}</p>
+    <div className="rounded-[18px] bg-white px-4 py-4">
+      <p className="text-[12px] font-bold text-dasiwa-muted">{label}</p>
+      <p className="mt-2 text-[22px] font-black text-dasiwa-text">{value}</p>
+      {helper ? <p className="mt-1 text-[11px] text-dasiwa-muted">{helper}</p> : null}
     </div>
   );
 }

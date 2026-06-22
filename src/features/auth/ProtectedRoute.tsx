@@ -15,10 +15,10 @@ export function ProtectedRoute({
 
   if (isLoading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-stone-50 px-4">
-        <div className="rounded-lg border border-stone-200 bg-white px-5 py-4 text-center shadow-sm">
-          <p className="text-sm font-medium text-stone-900">인증 상태 확인 중</p>
-          <p className="mt-1 text-sm text-stone-500">잠시만 기다려주세요.</p>
+      <div className="flex min-h-screen items-center justify-center bg-dasiwa-bg px-4">
+        <div className="rounded-3xl border border-dasiwa-border bg-white px-5 py-4 text-center shadow-sm">
+          <p className="text-sm font-semibold text-dasiwa-text">확인 중이에요</p>
+          <p className="mt-1 text-sm text-dasiwa-muted">잠시만 기다려주세요.</p>
         </div>
       </div>
     );

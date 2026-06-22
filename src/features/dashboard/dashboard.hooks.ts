@@ -9,6 +9,7 @@ type DashboardState = DashboardData & {
 export function useDashboardData(userId: string | undefined) {
   const [data, setData] = useState<DashboardState>({
     customers: [],
+    recentTreatmentCountLast7Days: 0,
     recentTreatments: [],
     totalCustomerCount: 0,
   });
