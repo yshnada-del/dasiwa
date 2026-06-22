@@ -4,12 +4,12 @@ import { useDashboardData } from "../../features/dashboard/dashboard.hooks";
 import { useFollowUps } from "../../features/follow-ups/followUps.hooks";
 import { formatDate } from "../../lib/dates";
 
-const imgImage = "http://localhost:3845/assets/5335b8b6d0e169e7cf8bdd06dbd8eda6f830d691.png";
-const imgBell = "http://localhost:3845/assets/e7fb1f9a81c3b1184a0d22a61a107c8528346997.svg";
-const imgSettings = "http://localhost:3845/assets/fd4aa48f1950bec8611d9fa6e4c671bb5c7cc9ad.svg";
-const imgChevronCustomer = "http://localhost:3845/assets/a1472512e55291d9bfa2567fece5fa507e5a6060.svg";
-const imgChevronTreatment = "http://localhost:3845/assets/9759797cc3a986b6365e6e8eab3b6d8b05171f83.svg";
-const imgChevronHeader = "http://localhost:3845/assets/a7f0636986fadb6ab8fbc7eb8bbbc372463f225a.svg";
+const imgImage = "/figma-assets/dasiwa-logo.png";
+const imgBell = "/figma-assets/dashboard-bell.svg";
+const imgSettings = "/figma-assets/dashboard-settings.svg";
+const imgChevronCustomer = "/figma-assets/chevron-customer.svg";
+const imgChevronTreatment = "/figma-assets/chevron-treatment.svg";
+const imgChevronHeader = "/figma-assets/chevron-header.svg";
 
 function dday(date: string | null) {
   if (!date) return "D-";

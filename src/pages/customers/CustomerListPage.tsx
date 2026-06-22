@@ -7,7 +7,7 @@ import { useCustomers } from "../../features/customers/customers.hooks";
 import type { Customer } from "../../features/customers/customers.types";
 import { formatDate, getEndOfCurrentWeekDateInputValue, getTodayDateInputValue } from "../../lib/dates";
 
-const FIGMA_LOGO_URL = "http://localhost:3845/assets/5335b8b6d0e169e7cf8bdd06dbd8eda6f830d691.png";
+const FIGMA_LOGO_URL = "/figma-assets/dasiwa-logo.png";
 
 type CustomerFilter = "all" | "needs_contact" | "today" | "managed";
 

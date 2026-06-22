@@ -11,7 +11,7 @@ type Slide = {
   title: string;
 };
 
-const FIGMA_SYMBOL_URL = "http://localhost:3845/assets/b9d29110d94d93003ae2787eb198575f05e73f1d.svg";
+const FIGMA_SYMBOL_URL = "/figma-assets/dasiwa-symbol.svg";
 
 const slides: Slide[] = [
   {

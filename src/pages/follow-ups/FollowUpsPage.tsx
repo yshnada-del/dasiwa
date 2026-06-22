@@ -9,7 +9,7 @@ import { useFollowUps, useMarkFollowUpDone } from "../../features/follow-ups/fol
 import type { FollowUpCustomer, FollowUpStatus } from "../../features/follow-ups/followUps.types";
 import { formatDate } from "../../lib/dates";
 
-const FIGMA_LOGO_URL = "http://localhost:3845/assets/5335b8b6d0e169e7cf8bdd06dbd8eda6f830d691.png";
+const FIGMA_LOGO_URL = "/figma-assets/dasiwa-logo.png";
 
 const statusLabel: Record<FollowUpStatus, string> = { overdue: "예정일 지남", today: "오늘 추천", this_week: "이번 주", done: "완료" };
 const statusTone: Record<FollowUpStatus, "amber" | "green" | "rose" | "stone"> = { overdue: "rose", today: "rose", this_week: "amber", done: "green" };

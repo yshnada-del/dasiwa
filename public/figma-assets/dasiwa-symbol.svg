@@ -1,0 +1,16 @@
+<svg preserveAspectRatio="none" width="100%" height="100%" overflow="visible" style="display: block;" viewBox="0 0 36 21.5938" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="DasiwaSymbol" clip-path="url(#clip0_4_1734)">
+<path id="Vector" d="M9.60241 14.096C15.2008 22.8934 20.7992 22.8934 26.3976 14.096" stroke="url(#paint0_linear_4_1734)" stroke-width="1.91945" stroke-linecap="round"/>
+<path id="Vector_2" d="M9.60241 10.1971C11.7557 10.1971 13.5013 11.9427 13.5013 14.0959C13.5013 16.2492 11.7557 17.9948 9.60241 17.9948C7.44912 17.9948 5.70353 16.2492 5.70353 14.0959C5.70353 11.9427 7.44912 10.1971 9.60241 10.1971Z" fill="var(--fill-0, #FFB6A3)"/>
+<path id="Vector_3" d="M26.3976 10.1971C28.5509 10.1971 30.2965 11.9427 30.2965 14.0959C30.2965 16.2492 28.5509 17.9948 26.3976 17.9948C24.2443 17.9948 22.4987 16.2492 22.4987 14.0959C22.4987 11.9427 24.2443 10.1971 26.3976 10.1971Z" fill="var(--fill-0, #D4144F)"/>
+</g>
+<defs>
+<linearGradient id="paint0_linear_4_1734" x1="9.60241" y1="14.096" x2="26.3976" y2="14.096" gradientUnits="userSpaceOnUse">
+<stop stop-color="#FFB6A3"/>
+<stop offset="1" stop-color="#D4144F"/>
+</linearGradient>
+<clipPath id="clip0_4_1734">
+<rect width="36" height="21.5938" fill="white"/>
+</clipPath>
+</defs>
+</svg>

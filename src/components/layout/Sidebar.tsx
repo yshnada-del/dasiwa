@@ -1,10 +1,10 @@
 import { Link, useLocation } from "react-router-dom";
 
-const imgHome = "http://localhost:3845/assets/e22e318a901b0ef13f54be10da343e8324c76b76.svg";
-const imgCustomers = "http://localhost:3845/assets/a57657a46e04b881d2999ba84d98f4cc93129fce.svg";
-const imgPlus = "http://localhost:3845/assets/0ac6fa09c5e78ccdf854673c560bfe315ca0f559.svg";
-const imgContact = "http://localhost:3845/assets/33bbc1c5749349ec2518f52f8483a203ed966d1a.svg";
-const imgSettings = "http://localhost:3845/assets/f8d36dd1663cf61ae13c522b3319fad94251d14e.svg";
+const imgHome = "/figma-assets/nav-home.svg";
+const imgCustomers = "/figma-assets/nav-customers.svg";
+const imgPlus = "/figma-assets/nav-plus.svg";
+const imgContact = "/figma-assets/nav-contact.svg";
+const imgSettings = "/figma-assets/nav-settings.svg";
 
 const navItems = [
   { to: "/app/dashboard", label: "홈", icon: imgHome, left: 20, active: (path: string) => path === "/app" || path === "/app/dashboard" },

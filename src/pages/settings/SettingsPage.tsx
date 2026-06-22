@@ -7,7 +7,7 @@ import { useAuth } from "../../features/auth/auth.hooks";
 import { useProfile, useUpdateProfile } from "../../features/profiles/profiles.hooks";
 import { ONBOARDING_COMPLETED_KEY } from "../../lib/onboarding";
 
-const FIGMA_LOGO_URL = "http://localhost:3845/assets/5335b8b6d0e169e7cf8bdd06dbd8eda6f830d691.png";
+const FIGMA_LOGO_URL = "/figma-assets/dasiwa-logo.png";
 
 export function SettingsPage() {
   const navigate = useNavigate();
